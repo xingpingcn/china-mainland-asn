@@ -1,7 +1,7 @@
 import asyncio
 import requests
 import threading
-import re
+import re,os
 from config import *
 
 
@@ -12,8 +12,9 @@ class main():
         # 填写函数名，此函数能将asn和name写入self.asn_dict
         #input the name of the func which has ability of writing asn and name from website or db to self.asn_dict
         self.requset_url_func_list = [
-            self.res_from_ipip_net, self.res_from_he_net]
-        self.asn_dict = dict()
+            self.res_from_ipip_net]
+        # asn_dict: {asn:name}
+        self.asn_dict = dict() 
         self.queue_list = []
 
     # 线程模式运行   run in threading
@@ -56,7 +57,7 @@ class main():
 
     async def worker(self, file_name, queue):
 
-        with open(f'{file_name}', 'w', encoding='utf8') as f:
+        with open(os.path.join('asn_txt',f'{file_name}'), 'w', encoding='utf8') as f:
             asn = await queue.get()
             f.write(f'{asn}')
             queue.task_done()
@@ -71,7 +72,10 @@ class main():
     async def run(self):
         await asyncio.gather(*(asyncio.to_thread(func) for func in self.requset_url_func_list))
         tasks = []
-
+        try:
+            os.makedirs('asn_txt')
+        except Exception as e:
+            print(e)
         names = self.__dict__  # add class variable dynamicly
         for isp in asn_list:
             if eval(isp):

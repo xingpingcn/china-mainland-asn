@@ -1,11 +1,13 @@
 # re pattern
 chinanet = 'china ?telecom|chinanet'
 cmcc = 'china ?mobile|cmnet|tietong|CHINA ?RAILWAY'
-unicom ='unicom|cnc'
+unicom = 'unicom|cnc'
+cernet = 'cngi|cernet'
+cstnet = 'cstnet'
 
-asn_list = ['chinanet','cmcc','unicom']
+asn_list = ['chinanet', 'cmcc', 'unicom', 'cernet', 'cstnet']
 
-#if set to false, output comma between ASN instead
+# if set to false, output comma between ASN instead
 output_newline = True
 
 
