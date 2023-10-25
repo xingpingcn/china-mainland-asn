@@ -3,7 +3,7 @@ chinanet = 'china ?telecom|chinanet'
 cmcc = 'china ?mobile|cmnet|tietong|CHINA ?RAILWAY'
 unicom = 'unicom|cnc'
 cernet = 'cngi|cernet'
-cstnet = 'cstnet'
+cstnet = 'cstne|CNIC-CAS'
 
 asn_list = ['chinanet', 'cmcc', 'unicom', 'cernet', 'cstnet']
 
