@@ -2,7 +2,7 @@
 
 Update per 24 hours.
 
-China mainland ASN classified by major China ISPs, including China Telecom (电信), China Mobile (tietong included; 中国移动，包含铁通), China Unicom (联通), CERNET (教育网) and CSTNET (中国科技网).
+China mainland ASN classified by major China ISPs, including China Telecom ( 电信 ), China Mobile ( tietong included; 中国移动，包含铁通 ), China Unicom ( 联通 ), CERNET ( 教育网 ) and CSTNET ( 中国科技网 ).
 
 ## Sources from 
 
