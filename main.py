@@ -1,7 +1,8 @@
 import asyncio
 import requests
 import threading
-import re,os
+import re
+import os
 from config import *
 
 
@@ -10,11 +11,11 @@ class main():
         self.num = 0
         self.lock = threading.Lock()
         # 填写函数名，此函数能将asn和name写入self.asn_dict
-        #input the name of the func which has ability of writing asn and name from website or db to self.asn_dict
+        # input the name of the func which has ability of writing asn and name from website or db to self.asn_dict
         self.requset_url_func_list = [
-            self.res_from_ipip_net]
+            self.res_from_ipip_net, self.res_from_he_net]
         # asn_dict: {asn:name}
-        self.asn_dict = dict() 
+        self.asn_dict = dict()
         self.queue_list = []
 
     # 线程模式运行   run in threading
@@ -57,7 +58,7 @@ class main():
 
     async def worker(self, file_name, queue):
 
-        with open(os.path.join('asn_txt',f'{file_name}'), 'w', encoding='utf8') as f:
+        with open(os.path.join('asn_txt', f'{file_name}'), 'w', encoding='utf8') as f:
             asn = await queue.get()
             f.write(f'{asn}')
             queue.task_done()
