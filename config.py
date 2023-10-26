@@ -2,7 +2,7 @@
 chinanet = 'china ?telecom|chinanet'
 cmcc = 'china ?mobile|cmnet|tietong|CHINA ?RAILWAY'
 unicom = 'unicom|cnc'
-cernet = 'cngi|cernet'
+cernet = 'cngi|cernet|China ?Education'
 cstnet = 'cstne|CNIC-CAS'
 
 

@@ -18,11 +18,20 @@ class main():
         self.asn_dict = dict()
         self.queue_list = []
 
+    def try_get_html(self, url, timeout=10, try_times=3):
+        count = 0
+        while count < try_times:
+            try:
+                response = requests.get(url, headers=headers, timeout=timeout)
+                response.encoding = 'utf8'
+                return response
+            except:
+                count += 1
+
     # 线程模式运行   run in threading
     def res_from_ipip_net(self):
         url = 'https://whois.ipip.net/iso/CN'
-        response = requests.get(url, headers=headers)
-        response.encoding = 'utf8'
+        response = self.try_get_html(url)
         re_pattern = re.compile(r'<tr>(.*?)</tr>', re.S)
         re_pattern_asn_name = re.compile(
             r'<td> ?<a.*?title="(.*?)AS([0-9]+)</a>\s?</td>', re.S)
@@ -36,12 +45,11 @@ class main():
                     self.asn_dict[asn] = name
             except:
                 pass
-    # 线程模式运行   run in threading
 
+    # 线程模式运行   run in threading
     def res_from_he_net(self):
         url = 'https://bgp.he.net/country/CN'
-        response = requests.get(url, headers=headers)
-        response.encoding = 'utf8'
+        response = self.try_get_html(url)
         re_pattern = re.compile(r'<tr>(.*?)</tr>', re.S)
         re_pattern_asn_name = re.compile(
             r'<td> ?<a.*?title="(.*?)AS([0-9]+)</a>\s?</td>', re.S)
