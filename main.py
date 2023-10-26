@@ -25,7 +25,8 @@ class main():
                 response = requests.get(url, headers=headers, timeout=timeout)
                 response.encoding = 'utf8'
                 return response
-            except:
+            except Exception as e:
+                print(e)
                 count += 1
 
     # 线程模式运行   run in threading
