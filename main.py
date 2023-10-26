@@ -14,6 +14,8 @@ class main():
         # input the name of the func which has ability of writing asn and name from website or db to self.asn_dict
         self.requset_url_func_list = [
             self.res_from_ipip_net, self.res_from_he_net]
+        # self.requset_url_func_list = [
+        #      self.res_from_he_net]
         # asn_dict: {asn:name}
         self.asn_dict = dict()
         self.queue_list = []
@@ -33,6 +35,8 @@ class main():
     def res_from_ipip_net(self):
         url = 'https://whois.ipip.net/iso/CN'
         response = self.try_get_html(url)
+        if response == None:
+            return
         re_pattern = re.compile(r'<tr>(.*?)</tr>', re.S)
         re_pattern_asn_name = re.compile(
             r'<td> ?<a.*?title="(.*?)AS([0-9]+)</a>\s?</td>', re.S)
@@ -51,6 +55,8 @@ class main():
     def res_from_he_net(self):
         url = 'https://bgp.he.net/country/CN'
         response = self.try_get_html(url)
+        if response == None:
+            return
         re_pattern = re.compile(r'<tr>(.*?)</tr>', re.S)
         re_pattern_asn_name = re.compile(
             r'<td> ?<a.*?title="(.*?)AS([0-9]+)</a>\s?</td>', re.S)
