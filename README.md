@@ -10,8 +10,8 @@ China mainland ASN classified by major China ISPs, including China Telecom（电
 
 ## Sources from 
 
-* [whois.ipip.net/iso/CN](https://whois.ipip.net/iso/CN)
 * [bgp.he.net/country/CN](https://bgp.he.net/country/CN)
+* [whois.ipip.net/iso/CN](https://whois.ipip.net/iso/CN) (I don't know why it can't work on github action with requests package but works on my PC. Thus you can try it on you own network condition and the ASN file in this repo won't be collected from this resource)
  
 
 <font color=#808080>You can add custom sources and code your custom crawler function in `main.py`. In addition, dont forget to write down your custom regular expression in `config.py` if you want.</font>
