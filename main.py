@@ -71,12 +71,20 @@ class main():
                 queue.task_done()
 
     async def run(self):
-        await asyncio.gather(*(asyncio.to_thread(func) for func in self.requset_url_func_list))
-        tasks = []
         try:
             os.makedirs('asn_txt')
         except Exception as e:
             print(e)
+        await asyncio.gather(*(asyncio.to_thread(func) for func in self.requset_url_func_list))
+        tasks = []
+        asn_list_lenth = asn_list.__len__()
+
+        # creat queue for writing not matching asn to other.txt
+        self.queue_other = asyncio.Queue()
+        self.queue_list.append(self.queue_other)
+        tasks.append(asyncio.create_task(
+            self.worker('other.txt', self.queue_other)))
+
         names = self.__dict__  # add class variable dynamicly
         for isp in asn_list:
             if eval(isp):
@@ -88,10 +96,17 @@ class main():
                     self.worker(file_name, names['queue_'+isp])))
 
         for key in self.asn_dict.keys():
+            count = 0
             for isp in asn_list:
                 if re.search(names['pattern_'+isp], self.asn_dict[key]):
                     names['queue_'+isp].put_nowait(key)
                     break
+                else:
+                    # not match anything in asn list, then write into other.txt
+                    count += 1
+                    if count == asn_list_lenth:
+                        self.queue_other.put_nowait(key)
+
         for queue in self.queue_list:
             await queue.join()
         for task in tasks:

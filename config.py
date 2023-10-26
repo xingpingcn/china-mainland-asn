@@ -5,6 +5,7 @@ unicom = 'unicom|cnc'
 cernet = 'cngi|cernet'
 cstnet = 'cstne|CNIC-CAS'
 
+
 asn_list = ['chinanet', 'cmcc', 'unicom', 'cernet', 'cstnet']
 
 # if set to false, output comma between ASN instead
