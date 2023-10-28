@@ -2,7 +2,7 @@ import asyncio
 import requests
 import threading
 import re
-import os
+import os,time,datetime
 from config import *
 
 
@@ -74,6 +74,7 @@ class main():
     async def worker(self, file_name, queue):
 
         with open(os.path.join('asn_txt', f'{file_name}'), 'w', encoding='utf8') as f:
+            f.write(f'// Updated date: UTC+0 {datetime.datetime.utcfromtimestamp(time.time())}\n')
             asn = await queue.get()
             f.write(f'{asn}')
             queue.task_done()
@@ -129,6 +130,7 @@ class main():
 
         # Wait until all worker tasks are cancelled.
         await asyncio.gather(*tasks, return_exceptions=True)
+        print('[success] updated')
 
 
 if __name__ == "__main__":
